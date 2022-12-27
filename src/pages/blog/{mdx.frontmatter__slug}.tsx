@@ -12,14 +12,6 @@ const BlogPost = ({ data, children }: MdxProps<{
   const isBigScreen = useMediaQuery({ query: '(min-width: 800px)' })
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 799px)' })
 
-  useEffect(() => {
-    if (isBigScreen) {
-      console.log('BIG SCREEN!!');
-    } else if (isTabletOrMobile) {
-      console.log('TABLET / MOBILE!!');
-    }
-  }, [isBigScreen, isTabletOrMobile]);
-
   return (
     <div>
       {data.mdx.frontmatter.slug}

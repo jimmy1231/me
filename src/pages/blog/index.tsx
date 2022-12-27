@@ -22,21 +22,21 @@ export default ({ data }: { data: {
 }
 
 export const query = graphql`
-    query {
-        allMdx {
-            nodes {
-                frontmatter {
-                    slug
-                    title
-                }
-                parent {
-                    ... on File {
-                        id
-                        name
-                        modifiedTime
-                    }
-                }
-            }
+  query {
+    allMdx(filter: {frontmatter: {type: {eq: "blog"}}}) {
+      nodes {
+        frontmatter {
+          slug
+          title
         }
+        parent {
+          ... on File {
+            id
+            name
+            modifiedTime
+          }
+        }
+      }
     }
+  }
 `

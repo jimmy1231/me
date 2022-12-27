@@ -41,8 +41,16 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        "name": "blog",
+        "name": "content",
         "path": "./src/content/"
+      },
+      __key: "content"
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "blog",
+        "path": "./src/content/blog/"
       },
       __key: "blog"
     },
@@ -51,7 +59,10 @@ const config: GatsbyConfig = {
       options: {
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-images`
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200
+            }
           }
         ]
       }
@@ -60,7 +71,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        pathToConfigModule: `src/utils/typography`
       },
     }
   ]

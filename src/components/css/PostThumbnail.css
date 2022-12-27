@@ -1,0 +1,9 @@
+.post-thumbnail {
+  max-width: 4em;
+  max-height: 4em;
+  border-radius: 5px;
+}
+
+.post-thumbnail img {
+  object-fit: cover;
+}
