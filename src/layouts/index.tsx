@@ -5,7 +5,10 @@ import Navbar from "../components/Navbar";
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
   gap: 10px;
 `
 

@@ -1,11 +1,10 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import {graphql, Link} from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {graphql} from "gatsby";
+import { getImage } from "gatsby-plugin-image";
 import ProfileSummary from "../components/ProfileSummary";
 import MdxResult from "../types/MdxFrontmatter";
 import {useMemo} from "react";
-import PostThumbnail from "../components/PostThumbnail";
 import BlogSummary from "../components/BlogSummary";
 
 const IndexPage: React.FC<PageProps<{
@@ -52,6 +51,7 @@ export const query = graphql`
     allMdx(
       filter: {frontmatter: {type: {eq: "blog"}}}
       sort: {frontmatter: {date: DESC}}
+      limit: 5
     ) {
       nodes {
         frontmatter {
