@@ -18,3 +18,14 @@ export default interface MdxResult {
     name: string;
   }
 }
+
+export interface AllMdx {
+  allMdx: {
+    nodes: MdxResult[]
+  }
+}
+
+export interface MdxThumbnail {
+  mdx: MdxResult;
+  thumbnail: any;
+}

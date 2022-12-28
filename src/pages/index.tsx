@@ -1,44 +1,38 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
+import styled from "styled-components";
 import {graphql} from "gatsby";
-import { getImage } from "gatsby-plugin-image";
 import ProfileSummary from "../components/ProfileSummary";
-import MdxResult from "../types/MdxFrontmatter";
-import {useMemo} from "react";
+import {AllMdx} from "../types/MdxFrontmatter";
 import BlogSummary from "../components/BlogSummary";
+import "../utils/graphql/AllMdxFrontmatter";
+import {useThumbnailAllMdx} from "../utils/hooks";
 
-const IndexPage: React.FC<PageProps<{
-  allMdx: {
-    nodes: MdxResult[]
-  }
-}>> = ({ data }) => {
-  let nodes: {
-    mdx: MdxResult;
-    thumbnail: any;
-  }[] = useMemo(() => {
-    return data.allMdx.nodes.map(node => {
-      let thumbnail = node.frontmatter.thumbnail;
-      return {
-        mdx: node,
-        thumbnail: thumbnail ? getImage(thumbnail.childImageSharp.gatsbyImageData) : null
-      }
-    });
-  }, [data.allMdx.nodes]);
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+`
+
+const IndexPage: React.FC<PageProps<AllMdx>> = ({ data }) => {
+  let nodes = useThumbnailAllMdx(data);
 
   return (
-    <main>
+    <Main>
       <ProfileSummary />
 
       {/* latest blogs */}
-      <h3>
-        Latest blogs
-      </h3>
       <div>
-        {nodes.map(({mdx:node, thumbnail}) => (
-          <BlogSummary {...node} thumbnail={thumbnail} />
-        ))}
+        <h3>
+          Latest blogs
+        </h3>
+        <div>
+          {nodes.map(({mdx:node, thumbnail}) => (
+            <BlogSummary {...node} thumbnail={thumbnail} />
+          ))}
+        </div>
       </div>
-    </main>
+    </Main>
   )
 }
 
@@ -54,23 +48,7 @@ export const query = graphql`
       limit: 5
     ) {
       nodes {
-        frontmatter {
-          slug
-          title
-          date(formatString: "YYYY MMM DD")
-          synopsis
-          thumbnail {
-            childImageSharp {
-              gatsbyImageData(width: 150)
-            }
-          }
-        }
-        parent {
-          ... on File {
-            id
-            name
-          }
-        }
+        ...AllMdxFrontmatter
       }
     }
   }`

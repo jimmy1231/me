@@ -73,7 +73,8 @@ const config: GatsbyConfig = {
       options: {
         pathToConfigModule: `src/utils/typography`
       },
-    }
+    },
+    "gatsby-transformer-remark"
   ]
 };
 
