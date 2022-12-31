@@ -1,15 +1,15 @@
-import MdxResult, {AllMdx, MdxThumbnail} from "../types/MdxFrontmatter";
+import {MarkdownNode, MdxThumbnail} from "../types/MdxFrontmatter";
 import {useMemo} from "react";
 import {getImage} from "gatsby-plugin-image";
 
-export function useThumbnailAllMdx (data: AllMdx): MdxThumbnail[] {
+export function useThumbnailAllMdx<D> (nodes: MarkdownNode<D>[]): MdxThumbnail<D>[] {
   return useMemo(() => {
-    return data.allMdx.nodes.map(node => {
+    return nodes.map(node => {
       let thumbnail = node.frontmatter.thumbnail;
       return {
         mdx: node,
         thumbnail: thumbnail ? getImage(thumbnail.childImageSharp.gatsbyImageData) : null
       }
     });
-  }, [data]);
+  }, [nodes]);
 }

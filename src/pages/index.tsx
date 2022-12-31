@@ -3,10 +3,11 @@ import type { HeadFC, PageProps } from "gatsby"
 import styled from "styled-components";
 import {graphql} from "gatsby";
 import ProfileSummary from "../components/ProfileSummary";
-import {AllMdx} from "../types/MdxFrontmatter";
+import BlogFrontmatter, {AllMdx} from "../types/MdxFrontmatter";
 import BlogSummary from "../components/BlogSummary";
-import "../utils/graphql/AllMdxFrontmatter";
 import {useThumbnailAllMdx} from "../utils/hooks";
+
+import "../utils/graphql/AllMdxFrontmatter";
 
 const Main = styled.main`
   display: flex;
@@ -14,8 +15,8 @@ const Main = styled.main`
   gap: 2em;
 `
 
-const IndexPage: React.FC<PageProps<AllMdx>> = ({ data }) => {
-  let nodes = useThumbnailAllMdx(data);
+const IndexPage: React.FC<PageProps<AllMdx<BlogFrontmatter>>> = ({ data }) => {
+  let nodes = useThumbnailAllMdx<BlogFrontmatter>(data.allMdx.nodes);
 
   return (
     <Main>

@@ -1,0 +1,8 @@
+.work-thumbnail {
+  width: 300px;
+  border-radius: 5px;
+}
+
+.work-thumbnail img {
+  object-fit: cover;
+}

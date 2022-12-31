@@ -55,6 +55,14 @@ const config: GatsbyConfig = {
       __key: "blog"
     },
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "work",
+        "path": "./src/content/work/"
+      },
+      __key: "work"
+    },
+    {
       resolve: "gatsby-plugin-mdx",
       options: {
         gatsbyRemarkPlugins: [
@@ -74,7 +82,19 @@ const config: GatsbyConfig = {
         pathToConfigModule: `src/utils/typography`
       },
     },
-    "gatsby-transformer-remark"
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200
+            }
+          }
+        ]
+      }
+    }
   ]
 };
 

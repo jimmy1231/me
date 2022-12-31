@@ -1,17 +1,13 @@
 import {ImageDataLike} from "gatsby-plugin-image";
 
-export default interface MdxResult {
-  frontmatter: {
-    slug: string;
-    date: string;
-    title: string;
-    synopsis: string;
-    thumbnail?: {
-      childImageSharp: {
-        gatsbyImageData: ImageDataLike | null;
-      }
-    }
-  }
+export enum MarkdownType {
+  blog = 'blog',
+  work = 'work'
+}
+
+export interface MarkdownNode<D> {
+  frontmatter: BaseFrontmatter & D
+  html?: any;
   parent: {
     id: string;
     modifiedTime: string;
@@ -19,13 +15,43 @@ export default interface MdxResult {
   }
 }
 
-export interface AllMdx {
-  allMdx: {
-    nodes: MdxResult[]
+export default interface BlogFrontmatter {
+  date: string;
+}
+
+export interface BaseFrontmatter {
+  type: MarkdownType;
+  title: string;
+  slug: string;
+  synopsis?: string;
+  thumbnail?: {
+    childImageSharp: {
+      gatsbyImageData: ImageDataLike | null;
+    }
   }
 }
 
-export interface MdxThumbnail {
-  mdx: MdxResult;
+export interface WorkFrontmatter {
+  repository: string;
+  tech: string;
+  code: string;
+  status: string;
+  timeline: string;
+}
+
+export interface AllMarkdownRemark<D> {
+  allMarkdownRemark: {
+    nodes: MarkdownNode<D>[]
+  }
+}
+
+export interface AllMdx<D> {
+  allMdx: {
+    nodes: MarkdownNode<D>[]
+  }
+}
+
+export interface MdxThumbnail<D> {
+  mdx: MarkdownNode<D>;
   thumbnail: any;
 }

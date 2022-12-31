@@ -21,3 +21,25 @@ export const AllMdxFrontmatter = graphql`
     }
   }
 `
+
+export const AllMarkdownRemarkFrontmatterWork = graphql`
+  fragment AllMarkdownRemarkFrontmatterWork on MarkdownRemark {
+    frontmatter {
+      slug
+      code
+      repository
+      status
+      synopsis
+      tech
+      thumbnail {
+        childImageSharp {
+          gatsbyImageData(width: 700)
+        }
+      }
+      timeline
+      title
+      type
+    }
+    html
+  }
+`

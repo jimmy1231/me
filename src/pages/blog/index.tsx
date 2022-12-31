@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 import styled from "styled-components";
 import * as _ from 'lodash';
 import {graphql, HeadFC, PageProps} from "gatsby";
-import {AllMdx, MdxThumbnail} from "../../types/MdxFrontmatter";
+import BlogFrontmatter, {AllMdx, MdxThumbnail} from "../../types/MdxFrontmatter";
 import "../../utils/graphql/AllMdxFrontmatter";
 
 // @ts-ignore
@@ -46,15 +46,16 @@ const Body = styled.div`
   }
 `
 
-const BlogPage: React.FC<PageProps<AllMdx>> = ({ data }) => {
-  let nodes = useThumbnailAllMdx(data);
+const BlogPage: React.FC<PageProps<AllMdx<BlogFrontmatter>>> = ({ data }) => {
+  let nodes = useThumbnailAllMdx<BlogFrontmatter>(data.allMdx.nodes);
 
   let groupBy: {
-    [index: string]: MdxThumbnail[]
+    [index: string]: MdxThumbnail<BlogFrontmatter>[]
   } = useMemo(() => {
     return _.groupBy(nodes, node => {
       let dateStr = node.mdx.frontmatter.date;
-      // get month-year
+
+      // get month-year string
       let date = new Date(Date.parse(dateStr));
       return `${date.getFullYear()} ${MonthLUT[date.getMonth()]}`;
     });
@@ -82,7 +83,6 @@ const BlogPage: React.FC<PageProps<AllMdx>> = ({ data }) => {
               {blogs.map(({ mdx, thumbnail }) => (
                 <BlogSummary
                   frontmatter={mdx.frontmatter}
-                  parent={mdx.parent}
                   thumbnail={thumbnail} />
               ))}
             </section>

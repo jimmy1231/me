@@ -1,11 +1,16 @@
 import React from 'react';
 import PostThumbnail from "./PostThumbnail";
 import {Link} from "gatsby";
-import MdxResult from "../types/MdxFrontmatter";
+import {BaseFrontmatter} from "../types/MdxFrontmatter";
 
 import "./css/BlogSummary.css";
 
-const BlogSummary: React.FC<MdxResult & { thumbnail: any }> = ({ frontmatter , thumbnail }) => {
+const BlogSummary: React.FC<{
+  frontmatter: BaseFrontmatter & {
+    date: string;
+  },
+  thumbnail: any
+}> = ({ frontmatter , thumbnail }) => {
   return (
     <Link to={`/blog/${frontmatter.slug}`} className='blog-summary'>
       <PostThumbnail thumbnail={thumbnail} />
