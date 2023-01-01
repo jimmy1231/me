@@ -26,7 +26,7 @@ const AboutPage: React.FC<PageProps<{
       title: string;
     }
   }
-}>> = ({ data }) => {
+}>> = ({ data , children }) => {
   return (
     <About>
       <div>
@@ -35,7 +35,7 @@ const AboutPage: React.FC<PageProps<{
       </div>
       <div>
         <h3>About me</h3>
-        <div dangerouslySetInnerHTML={{__html: data.markdownRemark.html}} />
+        <div>{children}</div>
         <ul>
           <li>Education</li>
           <li>Hobbies</li>
@@ -52,8 +52,7 @@ export const Head: HeadFC = () => <title>Jimmy Li | About</title>
 
 export const query = graphql`
   query {
-    markdownRemark(frontmatter: {slug: {eq: "about"}}) {
-      html
+    mdx(frontmatter: {slug: {eq: "about"}}) {
       frontmatter {
         slug
         title

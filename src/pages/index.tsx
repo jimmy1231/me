@@ -3,7 +3,7 @@ import type { HeadFC, PageProps } from "gatsby"
 import styled from "styled-components";
 import {graphql} from "gatsby";
 import ProfileSummary from "../components/ProfileSummary";
-import BlogFrontmatter, {AllMdx} from "../types/MdxFrontmatter";
+import BlogFrontmatter, {AllMarkdownRemark, AllMdx} from "../types/MdxFrontmatter";
 import BlogSummary from "../components/BlogSummary";
 import {useThumbnailAllMdx} from "../utils/hooks";
 

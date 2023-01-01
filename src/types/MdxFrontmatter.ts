@@ -6,7 +6,9 @@ export enum MarkdownType {
 }
 
 export interface MarkdownNode<D> {
-  frontmatter: BaseFrontmatter & D
+  id: string;
+  frontmatter: BaseFrontmatter & D;
+  excerpt?: string;
   html?: any;
   parent: {
     id: string;
@@ -17,6 +19,7 @@ export interface MarkdownNode<D> {
 
 export default interface BlogFrontmatter {
   date: string;
+  tags: string;
 }
 
 export interface BaseFrontmatter {
@@ -43,6 +46,14 @@ export interface AllMarkdownRemark<D> {
   allMarkdownRemark: {
     nodes: MarkdownNode<D>[]
   }
+}
+
+export interface MarkdownRemark<D> {
+  markdownRemark: MarkdownNode<D>;
+}
+
+export interface Mdx<D> {
+  mdx: MarkdownNode<D>;
 }
 
 export interface AllMdx<D> {

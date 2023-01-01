@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
 import {MarkdownNode, WorkFrontmatter} from "../types/MdxFrontmatter";
 import WorkThumbnail from "./WorkThumbnail";
 import styled from "styled-components";
 
 import "./css/ProjectSummary.css";
+import {navigate} from "gatsby";
 
 const Wrapper = styled.div`
   font-size: 0.9em;
@@ -13,11 +14,17 @@ const Wrapper = styled.div`
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px; 
   padding: 10px;
   border-radius: 10px;
+  
+  :hover {
+    cursor: pointer;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  }
 `
 
 const Left = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 300px;
   gap: 10px;
 `
 
@@ -29,6 +36,10 @@ const Title = styled.div`
 `
 
 const SummaryMdContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
   li, ul {
     margin-top: 0;
     margin-bottom: 0;
@@ -52,15 +63,25 @@ const ProjectSummary: React.FC<{
     status,
     timeline,
     title,
+    slug,
     synopsis
   } = node.frontmatter;
 
+  let onClick = useCallback(() => {
+    navigate(`/work/${slug}`);
+  }, [])
+
+  let onGithubClick = useCallback((e: Event) => {
+    e.stopPropagation()
+  }, [])
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Left>
         {/* Title */}
         <Title>
-          <a href={repository}>
+          {/* @ts-ignore */}
+          <a href={repository} target={"__blank"} onClick={onGithubClick}>
             "<strong>{title}</strong>"
           </a> -&nbsp;
           <span>{synopsis}</span>
@@ -68,7 +89,8 @@ const ProjectSummary: React.FC<{
 
         {/* Thumbnail */}
         <WorkThumbnail thumbnail={thumbnail} />
-
+      </Left>
+      <SummaryMdContainer>
         {/* Description */}
         <div>
           <KV name={'Languages/Technology'}>{tech}</KV>
@@ -76,8 +98,11 @@ const ProjectSummary: React.FC<{
           <KV name={'Status'}>{status}</KV>
           <KV name={'Timeline'}>{timeline}</KV>
         </div>
-      </Left>
-      <SummaryMdContainer dangerouslySetInnerHTML={{__html: node.html}} />
+
+        <div>
+          {node.excerpt}
+        </div>
+      </SummaryMdContainer>
     </Wrapper>
   )
 }

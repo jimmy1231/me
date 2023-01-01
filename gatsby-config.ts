@@ -62,19 +62,6 @@ const config: GatsbyConfig = {
       },
       __key: "work"
     },
-    {
-      resolve: "gatsby-plugin-mdx",
-      options: {
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1200
-            }
-          }
-        ]
-      }
-    },
     "gatsby-plugin-layout",
     {
       resolve: `gatsby-plugin-typography`,
@@ -83,9 +70,11 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: "gatsby-plugin-mdx",
       options: {
+        extensions: ['.md', '.mdx'],
         gatsbyRemarkPlugins: [
+          "gatsby-remark-autolink-headers",
           {
             resolve: `gatsby-remark-images`,
             options: {
