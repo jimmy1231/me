@@ -46,11 +46,15 @@ const ProfileSummary: React.FC = () => {
       <Right>
         <h2>Jimmy Li</h2>
         <p>
-          Hi! I'm Jimmy. I'm a <strong>fullstack software engineer</strong> based in <strong>Toronto, Canada</strong>.
-          I'm also an aspiring writer/blogger, sports and travel enthusiast.
+          Hi! I'm Jimmy. I'm a <strong>software engineer</strong> based in <strong>Toronto, Canada</strong>.
+          Welcome to my website/portfolio, where I showcase my work and occasionally blog about my life!
         </p>
         <p>
-          Welcome to my website, where I showcase my accomplishments and occasionally blog about my life!
+          I graduated from the University of Toronto in 2022 with a Bachelor's of Applied Science, majoring in Computer Engineering,
+          and have since been working as a Systems Software Developer for FutureVault Inc.
+        </p>
+        <p>
+          In my free time, I love to travel and golf with my family, play other sports, and write.
         </p>
         <Socials />
       </Right>

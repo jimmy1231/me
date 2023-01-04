@@ -1,5 +1,5 @@
 import React, {useMemo, useRef} from "react";
-import {graphql, Link, PageProps} from "gatsby";
+import {graphql, HeadFC, Link, PageProps} from "gatsby";
 import {MarkdownNode, Mdx} from "../../types/MdxFrontmatter";
 import { useMediaQuery } from "react-responsive";
 
@@ -10,6 +10,7 @@ import styled from "styled-components";
 import {useReadingSpeed, useThumbnailAllMdx} from "../../utils/hooks";
 import Tags from "../../components/Tags";
 import PostHeading from "../../components/PostHeading";
+import {Helmet} from "react-helmet";
 
 const Wrapper = styled.div`
   display: flex;
@@ -55,6 +56,9 @@ const MdxBlogPost: React.FC<PageProps<Mdx<BlogFrontmatter>>> = ({ data, children
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>Jimmy Li | {mdx.frontmatter.title}</title>
+      </Helmet>
       <Header>
         {/* @ts-ignore */}
         <GatsbyImage alt={'Image'} image={thumbnail} />
@@ -81,3 +85,4 @@ export const query = graphql`
     }
   }
 `
+

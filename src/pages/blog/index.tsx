@@ -29,9 +29,14 @@ const Header = styled.div`
 `
 
 const Body = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 3em;
+  
+  h4 {
+    margin-bottom: 5px;
+  }
   
   h4 a {
     text-decoration: none;
@@ -63,17 +68,6 @@ const BlogPage: React.FC<PageProps<AllMdx<BlogFrontmatter>>> = ({ data }) => {
 
   return (
     <Blog>
-      {/* Header */}
-      <Header>
-        <img src={diary} alt={'Diary image'} />
-        <div>
-          <h3>Blog</h3>
-          <p>
-            I write about anything and everything. From food, to adventures,
-            to technical articles.
-          </p>
-        </div>
-      </Header>
       <Body>
         {Object.entries(groupBy).map(([monthYear, blogs]) => {
           let id = monthYear.replace(' ', '-').toLowerCase();

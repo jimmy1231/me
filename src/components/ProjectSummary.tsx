@@ -1,6 +1,7 @@
 import React, {useCallback, useRef} from 'react';
 import {MarkdownNode, WorkFrontmatter} from "../types/MdxFrontmatter";
 import WorkThumbnail from "./WorkThumbnail";
+import KV from "./KV";
 import styled from "styled-components";
 
 import "./css/ProjectSummary.css";
@@ -45,12 +46,6 @@ const SummaryMdContainer = styled.div`
     margin-bottom: 0;
   }
 `
-
-const KV: React.FC<{ name: string, children?: React.ReactNode }> = ({ name, children }) => {
-  return (
-    <div><strong>{name}:</strong> {children}</div>
-  )
-}
 
 const ProjectSummary: React.FC<{
   node: MarkdownNode<WorkFrontmatter>;

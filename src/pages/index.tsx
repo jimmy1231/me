@@ -15,6 +15,12 @@ const Main = styled.main`
   gap: 2em;
 `
 
+const BlogSummaryList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
+
 const IndexPage: React.FC<PageProps<AllMdx<BlogFrontmatter>>> = ({ data }) => {
   let nodes = useThumbnailAllMdx<BlogFrontmatter>(data.allMdx.nodes);
 
@@ -27,11 +33,11 @@ const IndexPage: React.FC<PageProps<AllMdx<BlogFrontmatter>>> = ({ data }) => {
         <h3>
           Latest blogs
         </h3>
-        <div>
+        <BlogSummaryList>
           {nodes.map(({mdx:node, thumbnail}) => (
             <BlogSummary {...node} thumbnail={thumbnail} />
           ))}
-        </div>
+        </BlogSummaryList>
       </div>
     </Main>
   )
